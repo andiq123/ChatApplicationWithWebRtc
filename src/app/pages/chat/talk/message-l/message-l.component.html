@@ -1,0 +1,11 @@
+<div class="message-l" *ngIf="message">
+    <div class="container">
+        <div class="left-section">
+            <div class="image-holder"><img [src]="User?.photoUrl" [alt]="User?.displayName" /></div>
+            <p>{{message.time | date:'HH:MM'}}</p>
+        </div>
+        <div class="right-section">
+            <p>{{message.text}}</p>
+        </div>
+    </div>
+</div>

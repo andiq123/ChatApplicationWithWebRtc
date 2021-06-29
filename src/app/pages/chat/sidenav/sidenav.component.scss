@@ -1,0 +1,145 @@
+@import "../../../../variabiles";
+.sidenav {
+  width: 100%;
+  height: 100%;
+
+  .current-user {
+    display: flex;
+    position: relative;
+    .img-holder {
+      // box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+      width: 90px;
+      height: 90px;
+      overflow: hidden;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 10px 0;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 200ms ease-out;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    &:hover .hoverDropdown {
+      opacity: 1;
+      left: 180px;
+    }
+    .dropDownShower {
+      cursor: pointer;
+      height: 30px;
+      width: 50px;
+      border-radius: 20px;
+      margin: 8px;
+      background: transparent;
+      border: none;
+      &:hover {
+        background-color: darken(rgb(238, 225, 231), 5%);
+      }
+    }
+
+    .hoverDropdown {
+      box-shadow: 0.2em 1em 2em 0.1em rgba(177, 165, 165, 0.753);
+      background-color: white;
+      border-radius: 20px;
+      height: 50%;
+      position: absolute;
+      transition: all 0.2s ease-in-out;
+      opacity: 0;
+      left: 150px;
+      top: 35px;
+    }
+
+    .action-holder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button {
+        cursor: pointer;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        background: none;
+        border-radius: 30px;
+        &:hover {
+          background-color: darken(white, 8%);
+        }
+        i {
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .name-holder {
+      p {
+        margin: 20px 0 0 10px;
+        font-weight: bold;
+      }
+      .icon {
+        padding: 15px;
+        margin: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(238, 220, 223, 0.774);
+        }
+      }
+    }
+  }
+
+  .contacts {
+    background-color: $secondary-color;
+    .loading-holder {
+      .loading {
+        height: 30px;
+        margin: 20px;
+        background: linear-gradient(
+          90deg,
+          rgb(142, 197, 252) 0%,
+          rgb(224, 195, 252) 100%
+        );
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        .sparkle {
+          background: rgba(231, 226, 226, 0.856);
+          border-radius: 30px;
+          width: 5px;
+          height: 100%;
+          margin-left: 10px;
+          animation: dancing 1s ease-in-out infinite;
+          filter: blur(5px);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:800px) {
+  .sidenav {
+    display: flex;
+    flex-flow: column;
+
+    .contacts {
+      padding: 10px 0;
+    }
+
+    h3 {
+      padding: 10px;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes dancing {
+  0% {
+    margin-left: 10px;
+  }
+  100% {
+    margin-left: 100%;
+  }
+}

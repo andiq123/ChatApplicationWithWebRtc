@@ -1,0 +1,100 @@
+@import "../../../variabiles";
+
+.editProfileContainer {
+  .content {
+    width: 50%;
+    height: 400px;
+    background: $gradient-background;
+    display: grid;
+    grid-template-rows: 0.5fr 1fr;
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-section {
+      display: flex;
+      flex-flow: column;
+      justify-content: space-around;
+      .descriptionArea {
+        display: flex;
+        flex-flow: column;
+        margin-left: 15px;
+        label {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        textarea {
+          width: 80%;
+          font-size: 1.8rem;
+        }
+      }
+      form {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        width: 100%;
+        .form-control {
+          display: flex;
+          flex-flow: column;
+          margin-left: 20px;
+          label {
+            font-weight: bold;
+          }
+          input {
+            padding: 10px;
+          }
+          .progress-wrapper {
+            display: flex;
+            align-items: center;
+            .progress-container {
+              width: 100%;
+              border-radius: 20px;
+              border: 1px solid rgb(153, 136, 136);
+              .progress {
+                height: 10px;
+                border-radius: 20px;
+                background-color: $primary-color;
+              }
+            }
+          }
+          .progressText {
+            margin-left: 10px;
+          }
+        }
+        .info {
+          width: 50%;
+          ul {
+            margin-left: 18px;
+          }
+        }
+      }
+    }
+
+    .close-actions {
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        padding: 10px 20px;
+        font-size: 1.3em;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        &:hover {
+          background-color: rgb(235, 211, 216);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:800px) {
+  .editProfileContainer {
+    .content {
+      width: 100%;
+    }
+  }
+}

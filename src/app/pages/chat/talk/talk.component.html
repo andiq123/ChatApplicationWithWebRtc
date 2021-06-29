@@ -1,0 +1,42 @@
+<ng-container *ngIf="loggedUser && userTalkingTo else noUsersTemplate">
+    <app-call></app-call>
+    <app-calling></app-calling>
+
+    <div class="talk-section">
+        <header (mouseenter)="showUserPopUp = true" (mouseleave)="showUserPopUp = false">
+            <button class="hamburgher-menu" (click)="showSidenavService.toggle()"><i class="fas fa-bars"></i></button>
+            <p>{{userTalkingTo.displayName | titlecase}}</p>
+            <p class="status" *ngIf="userTalkingTo.lastActive">
+                <app-status-activity [lastActive]="userTalkingTo.lastActive"></app-status-activity>
+            </p>
+            <div class="messageSeen" *ngIf="messageSeen"><i class="fas fa-eye"></i></div>
+            <button (click)="makeCall()"><i class="fas fa-phone-alt"></i></button>
+            <app-info-user-pop-up *ngIf="showUserPopUp && userTalkingTo" [user]="userTalkingTo"></app-info-user-pop-up>
+        </header>
+        <div class="content" #scrollContent [ngStyle]="{'height': chatMessagesHeight + 'px'}">
+            <div *ngFor="let message of messages">
+                <app-message-l [message]="message" [User]="userTalkingTo" *ngIf="message.userIdTo === loggedUser.id">
+                </app-message-l>
+
+                <app-message-r [message]="message" [User]="loggedUser" *ngIf="message.userIdTo !== loggedUser.id">
+                </app-message-r>
+            </div>
+
+        </div>
+        <div class="footer">
+            <form #form="ngForm" (submit)="onSubmit(form)">
+                <div class="isTyping" *ngIf="isTyping"><i class="fas fa-pencil-alt"></i></div>
+                <input type=" text" name="message" name="text" ngModel autocomplete="off" autofocus
+                    (input)="setInputTypeChange($event)" />
+                <button type="submit" [disabled]="!form.value" style="cursor: pointer;"><i
+                        class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #noUsersTemplate>
+    <div class="no-users">
+        <h3>Please select a user to talk to</h3>
+    </div>
+</ng-template>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chats-c19ca": {
+      "hosting": {
+        "newChats": [
+          "chats-c19ca"
+        ]
+      }
+    }
+  }
+}

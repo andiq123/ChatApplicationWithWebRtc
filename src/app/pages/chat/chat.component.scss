@@ -1,0 +1,15 @@
+@import "../../../variabiles";
+.chat-section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(250px, 400px) 5fr;
+  grid-gap: 0.5%;
+  padding: 0.5%;
+}
+
+@media only screen and(max-width:800px) {
+  .chat-section {
+    display: flex;
+    flex-flow: column;
+  }
+}

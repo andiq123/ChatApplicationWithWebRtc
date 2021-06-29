@@ -1,0 +1,41 @@
+<div class="editProfileContainer modalContainer">
+    <div class="content">
+        <header>
+            <h2>Edit your profile!</h2>
+        </header>
+        <div class="form-section">
+            <form>
+                <div class="form-control">
+                    <label>Change your profile pic:</label>
+                    <input type="file" (change)="fileInput($event)">
+                    <div class="progress-wrapper">
+                        <div class="progress-container">
+                            <div class="progress" [style.width]="progress+'%'"></div>
+                        </div>
+                        <p class="progressText">{{progress}}%</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <h3>Info:</h3>
+                    <ul>
+                        <li>We consider only <strong>gif</strong>, <strong>png</strong> or <strong>jpeg</strong>
+                            formats.
+                        </li>
+                        <li>The size limit is <strong>{{sizeLimit}} mb</strong>.</li>
+                    </ul>
+                </div>
+
+            </form>
+            <div class="descriptionArea" *ngIf="loggedUser">
+                <label>Change your description!</label>
+                <textarea name="description" [(ngModel)]="loggedUser.description"></textarea>
+            </div>
+
+
+        </div>
+        <div class="close-actions">
+            <button (click)="updateDescription()">Save</button>
+            <button (click)="editProfile.close()">Close</button>
+        </div>
+    </div>
+</div>

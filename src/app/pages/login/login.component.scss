@@ -1,0 +1,133 @@
+.login-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .flex-section {
+    width: 70%;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    .google-login {
+      border-right: 1px solid gray;
+      height: 100%;
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 15px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        cursor: pointer;
+        box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+        transition: all 200ms ease-in-out;
+        &:hover {
+          background: darken(white, 5%);
+        }
+        &:active {
+          transform: scale(0.9);
+        }
+
+        i {
+          background: linear-gradient(to right, #1e9600, #fff200, #ff0000);
+          background-clip: text;
+          color: transparent;
+          margin-right: 10px;
+          font-size: 1.5rem;
+        }
+
+        &:hover > strong {
+          background: linear-gradient(to right, #ed213a, #93291e);
+          background-clip: text;
+          color: transparent;
+        }
+        strong {
+          margin-left: 5px;
+        }
+      }
+    }
+    form {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      width: 100%;
+      margin: 15vh auto;
+
+      .form-control {
+        display: flex;
+        flex-flow: column;
+
+        input,
+        button {
+          margin: 15px;
+          width: 250px;
+          padding: 3px;
+          border: 1px solid rgba(171, 171, 171, 0.78);
+        }
+      }
+      button {
+        box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+        border: 1px solid rgba(171, 171, 171, 0.78);
+        border-radius: 20px;
+        width: 70px !important;
+        background-color: #6ba6ff;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+        transition: background-color 200ms ease-in-out;
+        &:hover {
+          background-color: darken(#6ba6ff, 10%);
+        }
+      }
+    }
+  }
+}
+
+header {
+  padding: 5px 0 0 40px;
+}
+
+a:link {
+  margin: 20px;
+  text-decoration: none;
+  color: rgb(78, 230, 64);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+a:hover {
+  color: rgb(85, 183, 228);
+}
+
+@media only screen and(max-width:800px) {
+  .login-section {
+    .flex-section {
+      width: 100%;
+      flex-flow: column;
+
+      .google-login {
+        border: none;
+      }
+      form {
+        width: 100%;
+        .form-control {
+          width: 100%;
+          input,
+          button {
+            margin: 15px;
+            width: 90%;
+            padding: 10px;
+            border: 1px solid rgba(171, 171, 171, 0.78);
+          }
+          a {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+}

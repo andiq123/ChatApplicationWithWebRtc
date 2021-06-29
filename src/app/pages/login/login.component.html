@@ -1,0 +1,25 @@
+<header>
+    <h1>chats/login</h1>
+</header>
+
+<div class="login-section">
+    <div class="flex-section">
+        <div class="google-login">
+            <button class="signInWithGoogle" type="button" (click)="onLoginWithGoogle()">
+                <i class="fab fa-google"></i>Sign in with <strong>Google</strong></button>
+        </div>
+        <form #form="ngForm" (submit)="onLogin(form)">
+            <div class="form-control">
+                <label for="">EMAIL:</label>
+                <input type="email" placeholder="EMAIL" required name="email" ngModel>
+            </div>
+            <div class="form-control">
+                <label for="">PASSWORD:</label>
+                <input type="password" placeholder="PASSWORD" required name="password" ngModel>
+            </div>
+            <Button type="submit" [disabled]="!form.valid">LOG IN</Button>
+            <a routerLink="/register">REGISTER</a>
+        </form>
+    </div>
+</div>
+<app-footer></app-footer>

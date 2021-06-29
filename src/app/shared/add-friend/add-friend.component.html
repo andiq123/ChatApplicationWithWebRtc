@@ -1,0 +1,46 @@
+<div class="addFriendContainer modalContainer">
+    <div class="content">
+        <header>
+            <h2>Search for someone!</h2>
+            <form>
+                <div class="form-control">
+                    <input type="text" placeholder="Search by name..." [(ngModel)]="searchCriteria"
+                        (input)="search($event)" name="searchCriteria">
+                    <button (click)="search()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="form-control" id="range">
+                    <p>Range: {{range}} km</p>
+                    <input type="range" [value]="range" style="width: 50%;" min="1" max="maxRange"
+                        (input)="changeRange($event)">
+                </div>
+            </form>
+        </header>
+        <div class="result-section">
+            <ng-container *ngIf="usersFiltered.length > 0">
+                <div class="user" *ngFor="let object of usersFiltered">
+                    <div class="left-section">
+                        <div class="photo-holder">
+                            <img [src]="object.user.photoUrl" [alt]="object.user.displayName">
+                        </div>
+                        <div class="name-status-holder">
+                            <div class="name-holder">{{object.user.displayName | titlecase}}</div>
+                            <div class="status">
+                                <app-status-activity [lastActive]="object.user.lastActive"></app-status-activity>
+                            </div>
+                        </div>
+
+                        <div class="distance-holder">
+                            <p>{{object.distance}} km away</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button (click)="addToFriends(object.user)"><i class="fas fa-user-plus"></i></button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="close-actions">
+            <button (click)="addFriendService.close()">Close</button>
+        </div>
+    </div>
+</div>

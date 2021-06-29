@@ -1,0 +1,41 @@
+// 'success' | 'error' | 'warning'
+@import "../../../variabiles";
+
+.infoBadge {
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  width: 250px;
+  padding: 20px;
+  border-radius: 20px 0 0 20px;
+  z-index: 2;
+  box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+  animation: openToastr 200ms ease-in-out forwards;
+}
+.success {
+  background-color: $secondary-color;
+}
+.error {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
+
+.warning {
+  background-color: rgb(226, 226, 166);
+  color: black;
+}
+
+@keyframes openToastr {
+  0% {
+    bottom: 70px;
+    opacity: 0;
+  }
+
+  50% {
+    bottom: 40px;
+  }
+  100% {
+    bottom: 50px;
+    opacity: 1;
+  }
+}

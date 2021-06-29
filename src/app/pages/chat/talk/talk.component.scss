@@ -1,0 +1,152 @@
+@import "../../../../variabiles";
+.talk-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  animation: fadeInContent 500ms ease-in-out forwards;
+  header {
+    position: relative;
+    background-color: $secondary-color;
+    display: flex;
+
+    .hamburgher-menu {
+      display: none;
+    }
+
+    p {
+      margin: 12px 0 12px 25px;
+    }
+
+    button {
+      padding: 5px 20px;
+      border: none;
+      border-radius: 20px;
+      background: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 50px;
+      transition: background-color 50ms ease-in;
+      &:hover {
+        background-color: darken($secondary-color, 5%);
+      }
+      i {
+        font-size: 1.5em;
+        color: rgb(117, 106, 108);
+        transition: font-size 200ms ease-in-out;
+      }
+      &:active {
+        background-color: darken($secondary-color, 15%);
+      }
+      &:active > i {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+
+    overflow-y: scroll;
+    background-color: white;
+
+    .messageSeen::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: rgba(161, 146, 146, 0.753);
+      border-radius: 20px;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    form {
+      display: grid;
+      grid-template-columns: 1fr 0.1fr;
+      position: relative;
+      .isTyping {
+        position: absolute;
+        top: -30px;
+        left: 5px;
+        animation: float 300ms ease-in-out infinite alternate;
+        transition: font-size 200ms ease-in-out;
+        cursor: pointer;
+        &:hover {
+          font-size: 1.5rem;
+        }
+      }
+
+      input {
+        outline: none;
+        height: 40px;
+        border: 1px solid #ababab;
+        font-size: 1.3rem;
+      }
+
+      button {
+        border: 1px solid #ababab;
+        background-color: $secondary-color;
+        // border-radius: 0 20px 20px 0;
+
+        i {
+          transition: font-size 200ms ease-out;
+        }
+
+        &:hover {
+          background-color: darken($secondary-color, 5%);
+          i {
+            font-size: 1.3em;
+          }
+        }
+        &:active {
+          background-color: darken($secondary-color, 20%);
+        }
+      }
+    }
+  }
+}
+
+.no-users {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and(max-width:800px) {
+  .talk-section {
+    header {
+      .hamburgher-menu {
+        display: inline-block;
+        margin: 0;
+      }
+    }
+  }
+  .no-users {
+    margin-top: 20%;
+  }
+}
+
+@keyframes float {
+  0% {
+    top: -30px;
+  }
+  100% {
+    top: -25px;
+  }
+}
+
+@keyframes fadeInContent {
+  0% {
+    margin-top: -100px;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}

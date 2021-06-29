@@ -1,0 +1,8 @@
+<div class="userPopUp" *ngIf="user">
+    <div class="img-holder">
+        <img [src]="user.photoUrl" [alt]="user.displayName">
+    </div>
+    <div class="descriptionHolder">
+        <p>{{user.description }}</p>
+    </div>
+</div>

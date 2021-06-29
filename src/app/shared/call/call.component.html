@@ -1,0 +1,53 @@
+<ng-container *ngIf="callState !== enum.Idle && callState !== enum.SomeOneCallsYou">
+    <div class="call-container modalContainer">
+        <div class="content">
+            <div class="video-holder">
+                <ng-container [ngSwitch]="callState">
+                    <ng-container *ngSwitchCase="enum.WaitingForAnswer">
+                        <div class="waitingForAnswer">
+                            <h1>Calling...</h1>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="enum.CallAcceptedWaitingForConnection">
+                        <div class="waitingForAnswer">
+                            <h1 style="color:green">Answered</h1>
+                            <h3>Connecting...</h3>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="enum.CallRefused">
+                        <div class="waitingForAnswer">
+                            <h1 style="color:red">Call refused</h1>
+                            <h3>Closing...</h3>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="enum.ConnectionSuccessfull">
+                        <div class="remoteVideoContainer">
+                            <video *ngIf="remoteStream" [srcObject]="remoteStream" autoplay></video>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault style="color:red;">Daca vedeti acest mesaj, ceva necunoscut e in
+                        neregula</ng-container>
+                </ng-container>
+
+                <div class="localVideoContainer">
+                    <video *ngIf="localStream" [srcObject]="localStream" autoplay muted></video>
+                </div>
+
+            </div>
+            <div class="actions">
+                <div class="muting-actions">
+                    <button (click)="muteVideo()"><i class="fas fa-video-slash" *ngIf="!isVideoEnabled"></i>
+                        <i class="fas fa-video" *ngIf="isVideoEnabled"></i>
+                    </button>
+                    <button (click)="muteMic()"><i class="fas fa-microphone-alt-slash" *ngIf="!isAudioEnabled"></i>
+                        <i class="fas fa-microphone" *ngIf="isAudioEnabled"></i></button>
+                </div>
+                <button (click)="hangUp()"><i class="fas fa-phone-slash"></i></button>
+            </div>
+        </div>
+    </div>
+</ng-container>

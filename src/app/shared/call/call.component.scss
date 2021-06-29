@@ -1,0 +1,146 @@
+@import "../../../variabiles";
+
+.call-container {
+  position: absolute;
+  inset: 0;
+  .waitingForAnswer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    h1,
+    h3 {
+      color: white;
+      animation: floating 1000ms ease-in-out infinite alternate;
+    }
+  }
+}
+
+//Call successfull
+.call-container {
+  .content {
+    width: 50%;
+    height: 600px;
+    background: $gradient-background;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+
+    .video-holder {
+      background-color: black;
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      .remoteVideoContainer {
+        width: 50%;
+        overflow: hidden;
+
+        video {
+          object-fit: cover;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .localVideoContainer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 35%;
+        width: 25%;
+        video {
+          object-fit: cover;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
+      button {
+        padding: 10px 30px;
+        background-color: rgb(207, 108, 108);
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        i {
+          transition: font-size 100ms ease-in-out;
+        }
+        &:hover {
+          background-color: darken(rgb(207, 108, 108), 5%);
+        }
+        &:active {
+          background-color: darken(rgb(207, 108, 108), 15%);
+        }
+        &:active > i {
+          font-size: 0.8rem;
+        }
+      }
+      .muting-actions {
+        margin: 10px;
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+
+        button {
+          background: transparent;
+          color: black;
+          width: 100px;
+          border-radius: 20px;
+          transition: background-color 200ms ease-in-out;
+          box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+          i {
+            transition: font-size 100ms ease-in-out;
+          }
+          &:hover {
+            background-color: rgb(204, 193, 193);
+          }
+          &:active > i {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:800px) {
+  .call-container {
+    .waitingForAnswer {
+      width: 100%;
+    }
+    .content {
+      width: 100%;
+      .video-holder {
+        .remoteVideoContainer {
+          width: 100%;
+        }
+
+        .localVideoContainer {
+          width: 40%;
+          bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(0, 10px);
+  }
+}

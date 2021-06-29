@@ -1,0 +1,95 @@
+@import "../../../variabiles";
+header {
+  padding: 5px 0 0 40px;
+}
+
+.register-section {
+  form {
+    display: flex;
+    flex-flow: column;
+    width: 20%;
+    align-items: center;
+    margin: 15vh auto;
+
+    .form-control {
+      position: relative;
+      display: flex;
+      flex-flow: column;
+      .availableResult {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: -35px;
+        top: 27px;
+        border-radius: 20px;
+        cursor: pointer;
+        i {
+          transition: font-size 200ms ease-in-out;
+        }
+        &:hover > i {
+          font-size: 1.5rem;
+        }
+      }
+      input,
+      button {
+        margin: 15px;
+        width: 250px;
+        padding: 3px;
+        border: 1px solid rgba(171, 171, 171, 0.78);
+      }
+    }
+    button {
+      box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+      border: 1px solid rgba(171, 171, 171, 0.78);
+      border-radius: 20px;
+      width: 100px !important;
+      background: #6ba6ff;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
+      &:hover {
+        background-color: darken(#6ba6ff, 10%);
+      }
+    }
+    a:link {
+      margin: 20px;
+      text-decoration: none;
+      color: rgb(78, 230, 64);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    a:hover {
+      color: rgb(85, 183, 228);
+    }
+  }
+}
+
+.error {
+  color: red;
+}
+
+@media only screen and(max-width:800px) {
+  .register-section {
+    form {
+      width: 100%;
+      .form-control {
+        width: 100%;
+        input,
+        button {
+          margin: 15px;
+          width: 90%;
+          padding: 10px;
+          border: 1px solid rgba(171, 171, 171, 0.78);
+        }
+        a {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<header>
+    <h1>chats/register</h1>
+</header>
+
+<div class="register-section">
+    <form #form="ngForm" (submit)="onRegister(form)">
+        <div class="form-control ">
+            <label>USERNAME:</label>
+            <!-- aici am schimbat -->
+            <input type="text" placeholder="USERNAME" required name="displayName" ngModel
+                (change)="checkIfUserNameAvailable($event)">
+            <div class="availableResult"> <i class="fas fa-user-times"
+                    *ngIf="!isUserNameAvailable && isUserNameAvailable ===false"
+                    style="color:red; display:flex; flex-flow: column;"></i> <i class="far fa-user"
+                    *ngIf="isUserNameAvailable" style="color:green;"></i></div>
+        </div>
+        <div class="form-control">
+            <label>EMAIL:</label>
+            <input type="email" placeholder="EMAIL" required name="email" ngModel>
+        </div>
+        <div class="form-control">
+            <label>DESCRIPTION:</label>
+            <input type="text" placeholder="DESCRIPTION" name="description" ngModel>
+        </div>
+        <div class="form-control">
+            <label>PASSWORD:</label>
+            <input type="password" placeholder="PASSWORD" required name="password" ngModel #password>
+        </div>
+        <div class="form-control">
+            <label>CONFIRM:</label>
+            <input type="password" placeholder="CONFIRM PASSWORD" required name="confirmPassword" ngModel
+                #confirmPassword>
+        </div>
+        <div class="error" *ngIf="password.value && confirmPassword.value && password.value != confirmPassword.value">
+            Parolele sunt diferite
+        </div>
+        <Button type="submit" [disabled]="!form.valid">REGISTER</Button>
+        <a routerLink="/login">BACK TO LOGIN</a>
+    </form>
+
+</div>
+<app-footer></app-footer>

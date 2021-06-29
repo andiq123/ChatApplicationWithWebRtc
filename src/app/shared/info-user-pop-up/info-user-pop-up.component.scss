@@ -1,0 +1,45 @@
+@import "../../../variabiles";
+.userPopUp {
+  pointer-events: none;
+  position: absolute;
+  width: 500px;
+  background: $gradient-background;
+  left: 1%;
+  top: 50px;
+  display: flex;
+  animation: openUp 500ms ease-in-out forwards;
+  .img-holder {
+    flex: 0.5;
+    height: 10%;
+    padding: 15px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .descriptionHolder {
+    flex: 1;
+    overflow: auto;
+    p {
+      padding: 15px;
+    }
+  }
+}
+
+@keyframes openUp {
+  0% {
+    opacity: 0;
+    top: -20px;
+  }
+  100% {
+    opacity: 1;
+    top: 50px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .userPopUp {
+    left: 10px;
+  }
+}

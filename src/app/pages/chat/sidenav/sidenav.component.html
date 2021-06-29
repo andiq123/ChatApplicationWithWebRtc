@@ -1,0 +1,37 @@
+<div class="sidenav">
+    <div class="dropDownContent" *ngIf="showSidenav || (showSidenavService.show | async)">
+        <ng-container *ngIf="currentUser">
+            <div class="current-user">
+                <div class="img-holder">
+                    <img [src]="currentUser.photoUrl" [alt]="currentUser.displayName">
+                </div>
+                <div class="name-holder">
+                    <p>{{currentUser.displayName | titlecase}}</p>
+                    <div class="icon"> <i class="fas fa-ellipsis-v"></i></div>
+
+                </div>
+
+                <div class="action-holder hoverDropdown">
+                    <button (click)="openEditProfile()"><i class="fas fa-edit"></i></button>
+                    <button (click)="showAddFriend.open()"><i class="fas fa-user-plus"></i></button>
+                    <button (click)="authService.signOut()"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+
+            </div>
+
+
+            <div class="contacts" [ngStyle]="{'height': contactsHeight + (showSidenav==true ? 'px' : '%')}">
+                <div class="loading-holder" *ngIf="loading">
+                    <div class="loading"><span class="sparkle"></span></div>
+                    <div class="loading"><span class="sparkle"></span></div>
+                    <div class="loading"><span class="sparkle"></span></div>
+                </div>
+                <h3 *ngIf="!loading && contacts.length === 0">You dont have any friends for now...</h3>
+                <ng-container *ngIf="!loading && contacts.length > 0">
+                    <app-contact *ngFor=" let contact of contacts" [user]="contact" [currentUser]="currentUser">
+                    </app-contact>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>

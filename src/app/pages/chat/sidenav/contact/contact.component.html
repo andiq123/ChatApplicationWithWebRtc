@@ -1,0 +1,26 @@
+<div class="contact" *ngIf="user">
+    <div class="clickable" (click)="setUserTalkingTo()">
+        <div class="img-holder">
+            <img [src]="user.photoUrl" [alt]="user.displayName">
+        </div>
+
+        <div class="right-section">
+            <div class="name-unread-section">
+                <div class="name-holder">
+                    <p>{{user.displayName | titlecase}}</p>
+                </div>
+                <div class="unreadMessages">
+                    <ng-container *ngIf="unreadMessages > 0">
+                        {{unreadMessages}} <i class="fas fa-envelope"></i>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="status-holder">
+                <app-status-activity [lastActive]="user.lastActive"></app-status-activity>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button (click)="deleteFromFriends()"><i class="fas fa-user-minus"></i></button>
+    </div>
+</div>
