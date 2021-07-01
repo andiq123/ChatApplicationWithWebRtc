@@ -19,7 +19,7 @@
 //Call successfull
 .call-container {
   .content {
-    width: 50%;
+    width: 60%;
     height: 600px;
     background: $gradient-background;
     display: grid;
@@ -89,7 +89,7 @@
       }
       .muting-actions {
         margin: 10px;
-        width: 30%;
+        width: 50%;
         display: flex;
         justify-content: space-around;
 
@@ -99,7 +99,7 @@
           width: 100px;
           border-radius: 20px;
           transition: background-color 200ms ease-in-out;
-          box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+          box-shadow: 1px 1px 5px 1px rgba(143, 137, 137, 0.76);
           i {
             transition: font-size 100ms ease-in-out;
           }
@@ -115,21 +115,36 @@
   }
 }
 
-@media only screen and(max-width:800px) {
+@media only screen and(max-width:900px) {
   .call-container {
     .waitingForAnswer {
-      width: 100%;
+      width: 80%;
     }
+    .content {
+      width: 80%;
+      .video-holder {
+        .localVideoContainer {
+          width: 40%;
+          bottom: 0;
+        }
+      }
+      .actions {
+        .muting-actions {
+          // border: 1px solid red;
+          // width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:600px) {
+  .call-container {
     .content {
       width: 100%;
       .video-holder {
         .remoteVideoContainer {
           width: 100%;
-        }
-
-        .localVideoContainer {
-          width: 40%;
-          bottom: 0;
         }
       }
     }

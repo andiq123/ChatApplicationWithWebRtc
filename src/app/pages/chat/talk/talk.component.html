@@ -1,12 +1,12 @@
 <ng-container *ngIf="loggedUser && userTalkingTo else noUsersTemplate">
     <app-call></app-call>
-    <app-calling></app-calling>
+    <app-calling *ngIf="userTalkingTo" [userSelectedName]="userTalkingTo.displayName"></app-calling>
 
     <div class="talk-section">
         <header (mouseenter)="showUserPopUp = true" (mouseleave)="showUserPopUp = false">
             <button class="hamburgher-menu" (click)="showSidenavService.toggle()"><i class="fas fa-bars"></i></button>
             <p>{{userTalkingTo.displayName | titlecase}}</p>
-            <p class="status" *ngIf="userTalkingTo.lastActive">
+            <p class="status">
                 <app-status-activity [lastActive]="userTalkingTo.lastActive"></app-status-activity>
             </p>
             <div class="messageSeen" *ngIf="messageSeen"><i class="fas fa-eye"></i></div>

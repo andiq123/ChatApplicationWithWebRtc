@@ -1,5 +1,5 @@
-import { take } from 'rxjs/operators';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/_models/IUser';
 import { AddFriendService } from 'src/app/_services/add-friend.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -13,10 +13,12 @@ import { SidenavService } from 'src/app/_services/sidenav.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = [];
   loggedUser: IUser;
   userTalkingTo: IUser;
   screenHeight = window.innerHeight - 5;
+
   constructor(
     public showAddFriend: AddFriendService,
     public editProfile: EditProfileService,
@@ -26,14 +28,32 @@ export class ChatComponent implements OnInit {
     private geoLocationService: GeolocationService
   ) {}
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((x) => x.unsubscribe());
+  }
+
   ngOnInit(): void {
-    this.authService.currentUser.pipe(take(1)).subscribe((user) => {
-      this.loggedUser = user;
-      this.geoLocationService.setCoordsToLoggedUser(this.loggedUser.id);
+    this.subscriptions.push(
+      this.authService.currentUser.subscribe((user) => {
+        this.loggedUser = user;
+      })
+    );
+
+    this.subscriptions.push(
       this.messageService.userTalkingTo$.subscribe((userTalkingTo) => {
         this.userTalkingTo = userTalkingTo;
-      });
-    });
+      })
+    );
+
+    let interval;
+    if (!this.loggedUser) {
+      interval = setInterval(() => {
+        if (this.loggedUser) {
+          this.geoLocationService.setCoordsToLoggedUser(this.loggedUser.id);
+          clearInterval(interval);
+        }
+      }, 3000);
+    }
   }
 
   @HostListener('window:resize', ['$event'])

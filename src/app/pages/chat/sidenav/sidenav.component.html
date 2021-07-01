@@ -8,12 +8,12 @@
                 <div class="name-holder">
                     <p>{{currentUser.displayName | titlecase}}</p>
                     <div class="icon"> <i class="fas fa-ellipsis-v"></i></div>
-
                 </div>
 
                 <div class="action-holder hoverDropdown">
                     <button (click)="openEditProfile()"><i class="fas fa-edit"></i></button>
-                    <button (click)="showAddFriend.open()"><i class="fas fa-user-plus"></i></button>
+                    <button (click)="currentUser.coords && showAddFriend.open()"
+                        [ngClass]="{'notActive' : !currentUser.coords}"><i class="fas fa-user-plus"></i></button>
                     <button (click)="authService.signOut()"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
 

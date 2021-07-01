@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   currentUser: Observable<IUser | null>;
-  currentUserCache: IUser = null;
 
   constructor(
     private auth: AngularFireAuth,
@@ -27,24 +26,9 @@ export class AuthService {
     private router: Router
   ) {
     this.currentUser = this.auth.authState.pipe(
-      tap((user) => {
-        if (this.currentUserCache) {
-          return of(this.currentUserCache);
-        }
-        return user;
-      }),
       switchMap((user) => {
         if (user) {
-          return this.store
-            .doc<IUser>(`users/${user.uid}`)
-            .valueChanges()
-            .pipe(
-              tap((user) => {
-                if (user) {
-                  this.currentUserCache = user;
-                }
-              })
-            );
+          return this.store.doc<IUser>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -65,10 +49,6 @@ export class AuthService {
         take(1),
         map((data) => data.length === 0)
       );
-  }
-
-  getCurrentUserManual() {
-    return this.currentUserCache;
   }
 
   async signInGoogle() {
@@ -138,7 +118,6 @@ export class AuthService {
 
   async signOut() {
     await this.auth.signOut();
-    this.currentUserCache = null;
     this.router.navigate(['/login']);
   }
 }

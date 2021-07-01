@@ -7,7 +7,6 @@
     display: flex;
     position: relative;
     .img-holder {
-      // box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
       width: 90px;
       height: 90px;
       overflow: hidden;
@@ -28,6 +27,10 @@
     &:hover .hoverDropdown {
       opacity: 1;
       left: 180px;
+      .notActive {
+        filter: blur(2px);
+        opacity: 0.7;
+      }
     }
     .dropDownShower {
       cursor: pointer;
@@ -80,12 +83,16 @@
         font-weight: bold;
       }
       .icon {
-        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
         margin: 10px;
         border-radius: 20px;
         cursor: pointer;
         &:hover {
           background-color: rgba(238, 220, 223, 0.774);
+          box-shadow: 1px 1px 5px 1px rgb(209, 201, 201);
         }
       }
     }

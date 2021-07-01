@@ -1,4 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Call } from 'src/app/_enums/call.enum';
 import { CallPartialService } from 'src/app/_services/call-partial.service';
@@ -13,6 +19,7 @@ import { RingtoneService } from 'src/app/_services/ringtone.service';
 })
 export class CallingComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
+  @Input() userSelectedName: string;
   show: boolean = false;
   conversationId: string;
 

@@ -1,5 +1,9 @@
-<app-edit-profile *ngIf="editProfile.show | async"></app-edit-profile>
-<app-add-friend *ngIf="showAddFriend.show | async" [loggedUser]="loggedUser"></app-add-friend>
+<app-edit-profile *ngIf="loggedUser && editProfile.show | async" [loggedUser]="loggedUser">
+</app-edit-profile>
+
+<app-add-friend *ngIf="loggedUser && loggedUser.coords && showAddFriend.show | async" [loggedUser]="loggedUser">
+</app-add-friend>
+
 <div class="chat-section" [ngStyle]="{'height':screenHeight+'px'}">
     <app-sidenav *ngIf="loggedUser" [currentUser]="loggedUser"></app-sidenav>
     <app-talk *ngIf=" userTalkingTo && loggedUser" [loggedUser]="loggedUser" [userTalkingTo]="userTalkingTo">

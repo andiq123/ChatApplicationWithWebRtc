@@ -23,7 +23,7 @@
         border-radius: 20px;
         outline: none;
         cursor: pointer;
-        box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+        box-shadow: 1px 1px 5px 1px rgba(143, 137, 137, 0.76);
         transition: all 200ms ease-in-out;
         &:hover {
           background: darken(white, 5%);
@@ -33,7 +33,13 @@
         }
 
         i {
-          background: linear-gradient(to right, #1e9600, #fff200, #ff0000);
+          background: linear-gradient(
+            -120deg,
+            #4285f4,
+            #34a853,
+            #fbbc05,
+            #ea4335
+          );
           background-clip: text;
           color: transparent;
           margin-right: 10px;
@@ -70,7 +76,7 @@
         }
       }
       button {
-        box-shadow: 0.1em 0.3em 0.6em 0.1em rgba(102, 95, 95, 0.76);
+        box-shadow: 1px 1px 5px 1px rgba(143, 137, 137, 0.76);
         border: 1px solid rgba(171, 171, 171, 0.78);
         border-radius: 20px;
         width: 70px !important;

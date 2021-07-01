@@ -1,10 +1,9 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Call } from 'src/app/_enums/call.enum';
 import { CallPartialService } from 'src/app/_services/call-partial.service';
 import { CallStateService } from 'src/app/_services/call-state.service';
 import { CallService } from 'src/app/_services/call.service';
-import { ToastrService } from 'src/app/_services/toastr.service';
 
 @Component({
   selector: 'app-call',
@@ -39,7 +38,6 @@ export class CallComponent implements OnInit, OnDestroy {
       this.callService.eventremoteStream.subscribe((stream) => {
         if (stream) {
           this.remoteStream = stream;
-
           this.callStateService.setCallConnectionSuccesfull();
         }
       })

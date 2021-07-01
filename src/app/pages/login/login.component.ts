@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
         this.toastr.showSuccess('Logged in Succesfully');
         this.router.navigate(['/chat']);
       }
-
       this.loadingService.offLoading();
     } catch (error) {
       this.loadingService.offLoading();
@@ -47,10 +46,10 @@ export class LoginComponent implements OnInit {
 
       const success = await this.authService.signInGoogle();
       if (success) {
-        this.loadingService.offLoading();
         this.toastr.showSuccess('Logged in Succesfully');
         this.router.navigate(['/chat']);
       }
+      this.loadingService.offLoading();
     } catch (error) {
       this.loadingService.offLoading();
     }

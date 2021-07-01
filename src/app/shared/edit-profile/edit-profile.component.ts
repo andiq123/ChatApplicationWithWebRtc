@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { IUser } from 'src/app/_models/IUser';
@@ -14,22 +14,17 @@ import { DescriptionLimiter } from 'src/app/_utilities/descriptionLimiter.utilit
 })
 export class EditProfileComponent implements OnInit {
   readonly sizeLimit = 3;
-  loggedUser: IUser = null;
+  @Input() loggedUser: IUser;
   progress = 0;
 
   constructor(
     public editProfile: EditProfileService,
     private store: AngularFirestore,
-    private authService: AuthService,
     private storage: AngularFireStorage,
     private toastr: ToastrService
   ) {}
 
-  ngOnInit(): void {
-    this.authService.currentUser.subscribe((user) => {
-      this.loggedUser = user;
-    });
-  }
+  ngOnInit(): void {}
 
   async fileInput(event: any) {
     const files = event.target.files;

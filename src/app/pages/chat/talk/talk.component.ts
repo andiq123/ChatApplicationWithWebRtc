@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   HostListener,
   Input,
   OnChanges,
@@ -23,15 +24,14 @@ import { LastReadService } from 'src/app/_services/last-read.service';
 import { MessagesService } from 'src/app/_services/messages.service';
 import { OnTypingService } from 'src/app/_services/on-typing.service';
 import { SidenavService } from 'src/app/_services/sidenav.service';
+import { UsersService } from 'src/app/_services/users.service';
 
 @Component({
   selector: 'app-talk',
   templateUrl: './talk.component.html',
   styleUrls: ['./talk.component.scss'],
 })
-export class TalkComponent
-  implements OnInit, OnDestroy, OnChanges, AfterViewInit
-{
+export class TalkComponent implements OnInit, OnDestroy, OnChanges {
   private subscriptions: Subscription[] = [];
   @Input() loggedUser: IUser;
   @Input() userTalkingTo: IUser;
@@ -46,7 +46,7 @@ export class TalkComponent
   }
 
   messages: IMessage[] = [];
-  @ViewChild('scrollContent') scrollContent: any;
+  @ViewChild('scrollContent') scrollContent: ElementRef;
 
   constructor(
     public showSidenavService: SidenavService,
@@ -55,7 +55,8 @@ export class TalkComponent
     private callStateService: CallStateService,
     private callPartialService: CallPartialService,
     private onTypingService: OnTypingService,
-    private lastReadService: LastReadService
+    private lastReadService: LastReadService,
+    private usersService: UsersService
   ) {}
 
   setlastRead() {
@@ -70,24 +71,28 @@ export class TalkComponent
       );
   }
 
-  firstLoading = true;
-  ngAfterViewInit(): void {
-    // this.scrollContent.nativeElement.addEventListener('scroll', (e) => {
-    //   if (!this.firstLoading && e.target.scrollTop === 0) {
-    //     this.limitOfMessages += 2;
-    //     this.getMessages(true);
-    //   }
-    //   this.firstLoading = false;
-    // });
+  listenForUserProfileChanges() {
+    this.subscriptions.push(
+      this.usersService.getUser(this.userTalkingTo.id).subscribe((user) => {
+        if (this.userTalkingTo.description !== user.description)
+          this.userTalkingTo.description = user.description;
+
+        if (this.userTalkingTo.photoUrl !== user.photoUrl)
+          this.userTalkingTo.photoUrl = user.photoUrl;
+
+        this.userTalkingTo.lastActive = user.lastActive;
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.userTalkingTo) {
+      this.messageSeen = false;
       this.messages = [];
-      this.firstLoading = true;
       this.limitOfMessages = 5;
       this.ngOnDestroy();
       this.ngOnInit();
+      // this.firstLoading = true;
     }
   }
 
@@ -95,6 +100,7 @@ export class TalkComponent
     if (this.userTalkingTo) {
       this.getMessages();
       this.listenForTypingChanges();
+      this.listenForUserProfileChanges();
     }
   }
 
@@ -219,8 +225,7 @@ export class TalkComponent
         this.scrollContent.nativeElement.scrollTop
       )
         this.scrollContent.nativeElement.scrollTop =
-          this.scrollContent.nativeElement.scrollHeight +
-          this.scrollContent.nativeElement.clientHeight;
+          this.scrollContent.nativeElement.scrollHeight;
     }
   }
 
@@ -228,3 +233,16 @@ export class TalkComponent
     this.subscriptions.forEach((x) => x.unsubscribe());
   }
 }
+
+// firstLoading = true;
+// ngAfterViewInit(): void {
+//   // console.log(this.scrollContent.nativeElement.scrollHeight);
+//   // this.scrollContent.nativeElement.addEventListener('scroll', (e) => {
+//   //   console.log(this.scrollContent.nativeElement.scrollHeight);
+//   //   if (!this.firstLoading && e.target.scrollTop === 0) {
+//   //     this.limitOfMessages += 2;
+//   //     this.getMessages(true);
+//   //   }
+//   //   this.firstLoading = false;
+//   // });
+// }
